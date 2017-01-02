@@ -1,0 +1,27 @@
+<head>
+    {{ $baseURL := .Site.BaseURL }}
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial=scale=1.0">
+    {{- if isset .Site.Params "description" }}
+      <meta name="description" content="{{ .Site.Params.description }}">
+    {{- end}}
+
+    {{- if isset .Params "author" }}
+      {{- $author := index .Site.Params.authors .Params.author }}
+      {{- if isset $author "displayname" }}
+        <meta name="author" content="{{ $author.displayname }}">
+      {{- end }}
+    {{- end }}
+
+    {{ .Hugo.Generator  }}
+
+    <link rel="shortcut icon" href="{{ $baseURL }}/img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="{{ $baseURL }}/css/normalize.css" media="screen">
+    <link rel="stylesheet" href="{{ $baseURL }}/css/grid.css" media="screen">
+    <link rel="stylesheet" href="{{ $baseURL }}/css/style.css" media="screen">
+    <link rel="stylesheet" href="{{ $baseURL }}/css/responsive.css" media="screen">
+
+    <title>{{ .Title }}</title>
+    {{ template "_internal/google_analytics.html" . }}
+</head>
+

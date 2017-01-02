@@ -1,0 +1,10 @@
+[ taxonomy.exclude ]
+topics = [ "about", "nope" ]
+
+[ navToRender ]
+header = 3
+
+[ SummariesToRender ]
+homepage = 3
+topicIndex = 2 
+

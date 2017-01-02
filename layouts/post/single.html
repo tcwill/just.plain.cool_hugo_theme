@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  {{- partial "head_material.html" . }}
+  <body>
+  {{- partial "header.html" . }}
+  <div id="main" class="grid_9">
+    <div id="siteinfo" class="grid_2">
+      <div id="sidebar">
+	<h3>Back to Topic:</h3>
+	<nav>
+	{{- range .Params.topics }}
+          <a href="{{ "/topics/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+        {{- end }}
+	</nav>
+	<h3>Tags for this page:</h3>
+	<nav>
+  	{{- range .Params.tags }}
+    	  <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+  	{{- end }}
+	</nav>
+	{{ partial "author_block.html" . }}
+      </div>
+    </div>
+    <div id="content" class="grid_6">
+      <article>
+        <h1>{{ .Title }}</h1>
+        <h6>{{ .Date.Format "Mon, Jan 2, 2006" }}</h6>
+        {{ .Content }}
+      </article>
+    </div>
+  </div>
+  {{- partial "footer.html" . }}
+</body>
+</html>

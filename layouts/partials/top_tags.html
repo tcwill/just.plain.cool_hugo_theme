@@ -1,0 +1,8 @@
+{{ $baseURL := .Site.BaseURL }}
+          <nav>
+          {{- range first 15 .Site.Taxonomies.tags.ByCount }}
+            <a href="{{ $baseURL }}/tags/{{ .Name | urlize }}">{{ .Name }}</a>
+          {{- end }}
+            <a href="{{ $baseURL }}/tags/">All Tags...</a>
+          </nav>
+

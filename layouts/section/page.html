@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{{ $baseURL := .Site.BaseURL}}
+<html>
+  {{- partial "head_material.html" . }}
+  <body>
+  {{- partial "header.html" . }}
+  <div id="main" class="grid_9">
+    <div id="siteinfo" class="grid_2">
+      <div id="sidebar">
+          <h3>All Topics:</h3>
+          <nav>
+            {{- range .Site.Taxonomies.topics.Alphabetical }}
+              <a href="{{ $baseURL }}/topics/{{ .Name | urlize }}">{{ .Name }}</a>
+            {{- end}}
+          </nav>
+          <h3>Top Site Tags:</h3>
+	  {{partial "top_tags" . }}
+      </div>
+    </div>
+    <div id="content" class="grid_6">
+      <div class="contentlist">
+        <h2>All Pages:</h2>
+        <ul>
+        {{- range .Data.Pages }}
+          <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{- end }}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {{- partial "footer.html" .  }}
+  </body>
+</html>
+

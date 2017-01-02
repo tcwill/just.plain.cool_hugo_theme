@@ -1,0 +1,16 @@
+<!-- <header> from partial/header.html -->
+    {{ $baseURL := .Site.BaseURL }}
+    {{ $topicNavToRender := .Site.Data.config.navToRender.header }}
+    <header id="siteheader" class="grid_9">
+      <div id="sitetitle" class="grid_3">
+        <h1><a href="{{ $baseURL }}">Just.Plain.Cool</a></h1>
+      </div>
+      <div id="topnav" class="grid_4">
+        <nav>
+        {{- range first $topicNavToRender (where .Site.Taxonomies.topics.ByCount "Term" "not in" .Site.Data.config.taxonomy.exclude.topics) }}
+          <a href="{{ $baseURL }}/topics/{{ .Name | urlize }}">{{ .Name }}</a>
+        {{- end}}
+          <a href="{{ $baseURL }}/about/">about</a>
+        </nav>
+      </div>
+    </header>

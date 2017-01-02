@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  {{ $baseURL := .Site.BaseURL }}
+  {{- partial "head_material.html" . }}
+  <body>
+  {{- partial "header.html" . }}
+
+    <div id="main" class="grid_9">
+      <div id="siteinfo" class="grid_2">
+	<div id="sidebar">
+          <h3>All Tags:</h3>
+          <nav>
+            {{- range .Site.Taxonomies.tags.ByCount }}
+              <a href="{{ $baseURL }}/tags/{{ .Name | urlize }}">{{ .Name }}</a>
+            {{- end}}
+          </nav>
+	</div>
+      </div>
+      <div id="content" class="grid_6">
+	<div id="toclist" class="contentlist">
+	  <h2>Table of Contents by Tag:</h2>
+	  <ul>
+          {{ range $key, $taxonomy := .Site.Taxonomies.tags }}
+            <li> {{ $key }} </li>
+            <ul>
+            {{ range $taxonomy.Pages }}
+              <li hugo-nav="{{ .RelPermalink}}"><a href="{{ .Permalink}}"> {{ .LinkTitle }} </a> </li>
+            {{ end }}
+            </ul>
+          {{ end }}
+          </ul>
+	</div>
+      </div>
+    </div> <!-- end main -->
+    {{- partial "footer.html" .  }}
+  </body>
+</html>
+

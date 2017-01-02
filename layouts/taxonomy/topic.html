@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  {{- $baseURL := .Site.BaseURL }}
+  {{- partial "head_material.html" . }}
+  <body>
+
+  {{- partial "header.html" . }}  <!--  the dot helps pass variable scope and is needed -->
+
+
+  {{- $topicTitle := .Title  }}
+    <div id="main" class="grid_9">
+      <div id="siteinfo" class="grid_2">
+	<div id="sidebar">
+	  <h3>{{ $topicTitle }} Tags:</h3>
+	  <nav>
+       	    {{- $.Scratch.Set "tags" (slice) }}     
+	    {{- range .Data.Pages }}
+              {{- range $term := .Param "tags"  }}
+                {{- if not (in ($.Scratch.Get "tags") $term)   }}
+                  {{- $.Scratch.Add "tags" (slice $term) }}
+                {{- end}}
+              {{- end  }}
+            {{- end }}
+            {{- range sort ($.Scratch.Get "tags") }}
+		<a href="{{ $baseURL }}/tags/{{ . | urlize }}">{{ . }}</a>
+            {{- end }}
+	  </nav>
+	  <h3>Top Site Tags:</h3>
+	  {{ partial "top_tags.html" . }}
+        </div> <!-- end sidebar -->
+      </div> <!-- end siteinfo -->
+      {{ $summToRender := .Site.Data.config.SummariesToRender.topicIndex }}
+      <div id="content" class="grid_6">
+	{{- range first $summToRender (where .Data.Pages "Type" "eq" "post") }}
+	  <div class="postsummary">
+	    <div class="summary">
+    	      <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+		<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Mon, Jan 2, 2006"  }}</time>
+    		<p>{{ .Summary }}</p>
+  	    </div>
+  	    {{ if .Truncated }}
+  	    <div class="read-more-link">
+    	      <a href="{{ .RelPermalink }}">Read More…</a>
+  	    </div>
+  	    {{- end }}
+	  </div> <!-- end "postsummary" -->
+ 	{{- end}}
+
+	{{ $totPosts := (where .Data.Pages "Type" "eq" "post").Len }}
+	{{ $addPosts := (sub $totPosts $summToRender) }}
+	{{ $numPages := (where .Data.Pages "Type" "eq" "page").Len   }}
+
+	{{/* test to see if we need to "share the road between our postlist and page list" */}}
+	{{ $.Scratch.Add "renderPosts" 0 }}
+	{{ $.Scratch.Add "renderPages" 0 }}
+	{{ $.Scratch.Add "shareTheRoad" 0 }}
+	
+	{{- if gt $addPosts 0 }} {{ $.Scratch.Set "renderPosts" 1 }} {{- end }}
+	{{- if gt $numPages 0 }} {{ $.Scratch.Set "renderPages" 1 }} {{- end }}
+	{{- if and ($.Scratch.Get "renderPosts") ($.Scratch.Get "renderPages") }} {{ $.Scratch.Set "shareTheRoad" 1 }} {{- end }}
+
+	{{- if  $.Scratch.Get "renderPosts" }}
+	  {{ if $.Scratch.Get "shareTheRoad" }}
+	  <div id="postlist" class="contentlist splitleft" >
+	  {{else}}
+	  <div id="postlist" class="contentlist">
+	  {{- end }}
+	    <h3>Older Posts:</h3>
+	    <ul>
+	    {{- range after $summToRender (where .Data.Pages "Type" "eq" "post") }}
+		{{ .Render "li" }}
+	    {{- end }}
+	    </ul>
+	  </div>
+	{{- end }}
+
+	{{- if $.Scratch.Get "renderPages" }}
+	  {{ if $.Scratch.Get "shareTheRoad" }}
+	  <div id="pagelist" class="contentlist splitright">
+	  {{else}}
+	  <div id="pagelist" class="contentlist">
+	  {{- end }}
+	    <h3>Pages:</h3>
+              <ul>
+              {{- range (where .Data.Pages "Type" "eq" "page") }}
+		{{ .Render "li" }}
+              {{- end }}
+            </ul>
+
+	  </div>
+	{{- end }}
+      </div> <!-- end content -->
+    </div> <!-- end main -->
+    {{- partial "footer.html" . }}
+  
+  </body>
+</html>

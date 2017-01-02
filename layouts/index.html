@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  {{ $baseURL := .Site.BaseURL }}
+  {{ partial "head_material.html" . }}
+  <body>
+
+  {{ partial "header.html" . }}  <!--  the dot helps pass variable scope and is needed -->
+
+    <div id="main" class="grid_9">
+      <div id="siteinfo" class="grid_2">
+	<div id="sidebar">
+	  
+	  <h3>All Topics:</h3>
+	  <nav>
+	    {{- range .Site.Taxonomies.topics.Alphabetical }}
+              <a href="{{ $baseURL }}/topics/{{ .Name | urlize }}">{{ .Name }}</a>
+            {{- end}}
+	  </nav>
+	  <h3>Top Tags:</h3>
+	  {{ partial "top_tags.html" . }}
+	  {{ partial "author_block.html" . }}
+        </div> <!-- end sidebar -->
+      </div> <!-- end siteinfo -->
+      {{- $summToRender := .Site.Data.config.SummariesToRender.homepage }}
+      <div id="content" class="grid_6">
+	{{- range first $summToRender (where .Data.Pages "Type" "eq" "post") }}
+	  <div class="postsummary">
+	    <div class="summary">
+    	      <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+		<time datetime="{{.Date.Format "2006-01-02"}}">{{ .Date.Format "Mon, Jan 2, 2006"  }}</time>
+    		<p>{{ .Summary }}</p>
+  	    </div>
+  	    {{ if .Truncated }}
+  	    <div class="read-more-link">
+    	      <a href="{{ .RelPermalink }}">Read More…</a>
+  	    </div>
+  	    {{- end }}
+	  </div> <!-- end "postsummary" -->
+ 	{{- end}}
+	<div id="postlist" class="contentlist">
+	  <h3>Older Posts:</h3>
+	  <ul>
+	  {{- range after $summToRender (where .Data.Pages "Type" "eq" "post") }}
+	    {{ .Render "li" }}
+	  {{- end }}
+	  </ul>
+	</div>
+      </div> <!-- end content -->
+    </div> <!-- end main -->
+    {{- partial "footer.html" . }}
+  
+  </body>
+</html>

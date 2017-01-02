@@ -1,0 +1,18 @@
+        {{- if isset .Params "author" }}
+          {{ $author := index .Site.Params.authors .Params.author }}
+          {{- if isset $author "displayname" }}
+          <div id="author">
+            <h3>Author:</h3>
+            <address>
+              <dl>
+                <dt>{{ $author.displayname }}</dt>
+                {{ if isset $author "img" }}<dd><img alt="author photo" src="{{.Site.BaseURL}}{{ $author.img }}"/></dd>{{ end }}
+                {{ if isset $author "website" }}<dd><a href="{{ $author.website }}">web</a></dd>{{ end }}
+                {{ if isset $author "email" }}<dd><a href="mailto:{{ $author.email }}">email</a></dd>{{ end }}
+		{{ if isset $author "githubname" }}<dd><a href="https://github.com/{{$author.githubname }}">github</a></dd>{{ end }}
+              </dl>
+            </address>
+          </div>
+          {{- end }}
+        {{- end }}
+

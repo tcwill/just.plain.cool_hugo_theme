@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  {{ $baseURL := .Site.BaseURL }}
+  {{- partial "head_material.html" . }}
+  <body>
+  {{- partial "header.html" . }}
+
+    <div id="main" class="grid_9">
+      <div id="siteinfo" class="grid_2">
+	<div id="sidebar">
+         <h3>All Topics:</h3>
+          <nav>
+            {{- range .Site.Taxonomies.topics.ByCount }}
+              <a href="{{ $baseURL }}/topics/{{ .Name | urlize }}">{{ .Name }}</a>
+            {{- end}}
+          </nav>
+	</div>
+      </div>
+      <div id="content" class="grid_6">
+	<div id="toclist" class="contentlist">
+	  <h2>Table of Contents by Topic:</h2>
+	  <ul>
+          {{ range $key, $taxonomy := .Site.Taxonomies.topics }}
+            <li> {{ $key }} </li>
+            <ul>
+            {{ range $taxonomy.Pages }}
+              <li hugo-nav="{{ .RelPermalink}}"><a href="{{ .Permalink}}"> {{ .LinkTitle }} </a> </li>
+            {{ end }}
+            </ul>
+          {{ end }}
+          </ul>
+	</div>
+      </div>
+    </div> <!-- end main -->
+    {{- partial "footer.html" .  }}
+  </body>
+</html>
+

@@ -1,0 +1,73 @@
+/*
+ Width: 100%
+ # Columns : 9 
+ Column width: 11.11%
+ Gutter : 0
+
+ Apparent breaks: 
+    1) 1098px - navi menu begins to wrap
+    2) 678px - social icons in header break
+    3) 585px - title wraps - can fix w/ #2
+    4) 456px - footer falls apart
+    5) 800px - fox gets too small...
+ 
+ */
+
+.grid_1 { width: 11.1111%; }
+.grid_2 { width: 22.2222%; }
+.grid_3 { width: 33.3333%; }
+.grid_4 { width: 44.4444%; }
+.grid_5 { width: 55.5555%; }
+.grid_6 { width: 66.6666%; }
+.grid_7 { width: 77.7777%; }
+.grid_8 { width: 88.8888%; }
+.grid_9 { width: 100%; }
+ 
+.grid_1,
+.grid_2,
+.grid_3,
+.grid_4,
+.grid_5,
+.grid_6,
+.grid_7,
+.grid_8,
+.grid_9 {
+	margin: 0;
+  padding: 0;
+	float: left;
+	display: block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.nogrid { /* use for local styling */ }
+
+.alpha{margin-left: 0;}
+.omega{margin-right: 0;}
+
+.container{
+  width: 100%;
+  height: 100%; 
+} /* footer is outside of container to use neg margin to force down to bottom of page */
+
+
+
+.group:before, .group:after {
+  display: table;
+  content: "";
+}
+.group:after {
+  clear: both;
+}
+
+/* * html .group,*:first-child+html .group {zoom:1} */
+
+clearfix:after{clear:both;content:' ';display:block;font-size:0;line-height:0;visibility:hidden;width:0;height:0}
+
+/* dumpster
+
+x.clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0}
+
+x.clearfix:after{clear:both;content:' ';display:block;font-size:0;line-height:0;visibility:hidden;width:0;height:0}
+
+*/
