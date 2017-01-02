@@ -1,6 +1,10 @@
-The homepage for the just.plain.cool theme [can be found here](http://just.plain.cool/hugo-theme/).
+# Just.Plain.Cool Hugo Theme
 
-This theme was developed with a problem in mind.  I had several existing
+This is a theme for Hugo that I created for [my website](http://just.plain.cool).
+
+The homepage for the theme [can be found here](http://just.plain.cool/hugo-theme/).
+
+I developed the theme with a problem in mind.  I had several existing
 topical blogs that I wanted to fold into a single website.  Each blog
 had its own URL that I'd like to keep around and point to different topic
 pages in the consolidated site.
