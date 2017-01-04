@@ -81,9 +81,11 @@ taxonomy the more consistency you apply here, the more useful these will
 be.  I think of these as a way to call out specific subtopics or just
 novel nouns that appear through the site.
 
+```
 +++
 tags: [ "wildlife","adventure","landscape"  ]
 +++
+```
 
 When the above is combined with the Topic of "photography" this will help
 with navigating your subtopics.

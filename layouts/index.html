@@ -24,18 +24,7 @@
       {{- $summToRender := .Site.Data.config.SummariesToRender.homepage }}
       <div id="content" class="grid_6">
 	{{- range first $summToRender (where .Data.Pages "Type" "eq" "post") }}
-	  <div class="postsummary">
-	    <div class="summary">
-    	      <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
-		<time datetime="{{.Date.Format "2006-01-02"}}">{{ .Date.Format "Mon, Jan 2, 2006"  }}</time>
-    		<p>{{ .Summary }}</p>
-  	    </div>
-  	    {{ if .Truncated }}
-  	    <div class="read-more-link">
-    	      <a href="{{ .RelPermalink }}">Read More…</a>
-  	    </div>
-  	    {{- end }}
-	  </div> <!-- end "postsummary" -->
+	  {{ .Render "summary" }}
  	{{- end}}
 	<div id="postlist" class="contentlist">
 	  <h3>Older Posts:</h3>
