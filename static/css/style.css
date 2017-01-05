@@ -293,6 +293,23 @@
 	margin: 0 0 6px 0; 
 	font-size: .8em;
   }
+  div#fourohfour {
+	display: block;
+	float: none;
+        margin: 10% auto;
+        padding: 1% 2% 2% 2%;
+        background-color: #fdfdfd;
+        color: #303A52;
+        border: 1px solid #272727;
+        border-radius: 3px;
+        box-shadow: 3px 5px 3px #131313;
+	text-align: center;
+  }
+  div#fourohfour ul {
+	list-style: none;
+	padding: 0;
+  }
+
 }
 
 

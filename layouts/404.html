@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  {{ $baseURL := .Site.BaseURL }}
+  {{ partial "head_material.html" . }}
+  <body>
+   <div id="main" class="grid_9">
+    <div id="fourohfour" class="grid_3">
+	<h1>404</h1>
+	<h2>Well, this isn't cool...</h2>
+	<h3>the thing you want isn't there</h3>
+	<h3>you might try starting here:</h3>
+	<ul>
+	  <li><a href="{{ $baseURL }}">Home</a></li>
+	</ul>
+    </div>
+   </div>
+  </body>
+</html>
