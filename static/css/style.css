@@ -24,6 +24,12 @@
 	text-decoration: none;
 	margin: 0;
   }
+  h2 {
+	font-size: 1.20em;
+  }
+  h3 {
+	font-size: 1.10em;
+  }
   h3,h4,h5 {
     font-family:'Open Sans', sans-serif;
     text-decoration: none;
