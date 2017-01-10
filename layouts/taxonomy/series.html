@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  {{- $baseURL := .Site.BaseURL }}
+  {{- partial "head_material.html" . }}
+  <body>
+
+  {{- partial "header.html" . }}  <!--  the dot helps pass variable scope and is needed -->
+
+
+  {{- $seriesTitle := .Title  }}
+    <div id="main" class="grid_9">
+      <div id="siteinfo" class="grid_2">
+	<div id="sidebar">
+	  <h3>Tags in Series:</h3>
+	  <nav>
+       	    {{- $.Scratch.Set "tags" (slice) }}     
+	    {{- range .Data.Pages }}
+              {{- range $term := .Param "tags"  }}
+                {{- if not (in ($.Scratch.Get "tags") $term)   }}
+                  {{- $.Scratch.Add "tags" (slice $term) }}
+                {{- end}}
+              {{- end  }}
+            {{- end }}
+            {{- range sort ($.Scratch.Get "tags") }}
+		<a href="{{ $baseURL }}/tags/{{ . | urlize }}">{{ . }}</a>
+            {{- end }}
+	  </nav>
+	  <h3>Top Site Tags:</h3>
+	  {{ partial "top_tags.html" . }}
+        </div> <!-- end sidebar -->
+      </div> <!-- end siteinfo -->
+      
+      <div id="content" class="grid_6">
+	<header id="seriestitle">
+         <h1>All entries in series: {{ $seriesTitle }}</h1>
+	</header>
+      {{- range (where .Data.Pages "Type" "eq" "post").ByDate }}
+	  {{ .Render "summary" }}
+      {{- end}}
+      </div> <!-- end content -->
+    </div> <!-- end main -->
+    {{- partial "footer.html" . }}
+  
+  </body>
+</html>

@@ -6,6 +6,17 @@
   <div id="main" class="grid_9">
     <div id="siteinfo" class="grid_2">
       <div id="sidebar">
+      {{ if .Params.series }}
+        {{ $seriesname := index .Params.series 0 }}
+        {{ $seriestaxstr := $seriesname | urlize }}
+	{{ $seriespgs := index .Site.Taxonomies.series $seriestaxstr }}
+        <h3>Series Entries:</h3>
+	<nav>
+	{{ range $seriespgs.Pages.ByDate }}
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+        {{- end}}
+	</nav>
+      {{- end }}
 	<h3>Back to Topic:</h3>
 	<nav>
 	{{- range .Params.topics }}
@@ -27,6 +38,19 @@
         <h6>{{ .Date.Format "Mon, Jan 2, 2006" }}</h6>
         {{ .Content }}
       </article>
+    {{ if .Params.series }}
+      {{ $seriesname := index .Params.series 0 }}
+      {{ $seriestaxstr := $seriesname | urlize }}
+      {{ $seriespgs := index .Site.Taxonomies.series $seriestaxstr }}
+      <div id="series" class="contentlist">
+        <h3>Series: {{$seriesname}}</h3>
+        <ul>
+        {{ range $seriespgs.Pages.ByDate }}
+          {{ .Render "li" }}
+        {{- end}}
+        </ul>
+      </div>
+    {{- end }}
     </div>
   </div>
   {{- partial "footer.html" . }}

@@ -160,8 +160,8 @@
 	margin-right: 5.5%;
 	padding: 0 0 20px 0;
   }
-  #content article {
-	margin: 2% 0 0 2%;
+  #content header, #content article {
+	margin: 2% 0 0 0%;
         padding: 1% 2% 2% 2%;
         background-color: #fdfdfd;
         color: #303A52;
@@ -230,6 +230,14 @@
   }
   .contentlist a:hover {
         color: #c44a2f;
+  }
+  .contentlist ul {
+        margin: 0;
+        padding: 0 0 0 2%;
+        list-style-type: none;
+  }
+  .contentlist li {
+        margin: 5px 0 0 0;
   }
 
   .splitleft {
