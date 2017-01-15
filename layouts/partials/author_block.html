@@ -10,6 +10,7 @@
                 {{ if isset $author "website" }}<dd><a href="{{ $author.website }}">web</a></dd>{{ end }}
                 {{ if isset $author "email" }}<dd><a href="mailto:{{ $author.email }}">email</a></dd>{{ end }}
 		{{ if isset $author "githubname" }}<dd><a href="https://github.com/{{$author.githubname }}">github</a></dd>{{ end }}
+		{{ if isset $author "qrzcall" }}<dd><a href="https://qrz.com/db/{{$author.qrzcall }}">qrz</a></dd>{{ end }}
               </dl>
             </address>
           </div>
