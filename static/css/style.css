@@ -207,6 +207,12 @@
   .postsummary a:hover {
 	color: #c44a2f;
   }
+  .postsummary img {
+        display: block;
+        max-width: 90%;
+        margin: 0 auto;
+        border: 2px solid #272727;
+  }
 
   .contentlist {
         margin: 2% 0 0 0;
